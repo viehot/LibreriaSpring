@@ -15,9 +15,6 @@ public class ControladorMain {
 		return "index.html"; // El html es un String, por eso el método devuelve String
 	}
 	
-	@GetMapping("/autor/registro")
-	public String autor() {
-		return "crearAutor.html";
-	}
+
 
 }
