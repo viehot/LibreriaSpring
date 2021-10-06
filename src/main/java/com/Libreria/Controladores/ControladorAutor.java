@@ -19,6 +19,11 @@ public class ControladorAutor {
 	
 	@Autowired
 	private ServicioAutor servAutor;
+	
+	@GetMapping("/registro")
+	public String registroAutor() {
+		return "crearAutor";
+	}
 
 	@PostMapping("/registro") //Post: envío info // Acá tiene que ir al registro (cuando haga la acción)
 	public String nuevoAutor(@RequestParam("nombre") String nombre) {
