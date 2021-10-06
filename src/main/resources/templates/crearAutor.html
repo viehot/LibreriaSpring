@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Boostrap</title>
+</head>
+<body>
+	<section>
+        <form class="row g-3" action="/autor/registro" method="POST"> <!-- tiene 3 columnas // autor/registro es donde va
+        el navegador // Post es que voy a enviar informacion
+        // este "/registro" POST coincide con el controladorAutor-->
+            <div class="col-md-4"> <!-- md-4 ocupa un tercio de la pantalla / divide en 12 -->
+              <label for="validationName" class="form-label">Nombre</label>
+              <input type="text" class="form-control" name="nombre">
+              <!-- name="nombre" ese nombre tiene que coincidir con el nombre del autor en este caso
+              y el type tiene que coincidir con el tipo de dato del "nombre" -->
+            </div>
+
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+          </form>
+      </section>
+	
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="javaScript.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+</body>
+</html>
