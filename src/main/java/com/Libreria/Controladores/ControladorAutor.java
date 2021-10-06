@@ -28,7 +28,7 @@ public class ControladorAutor {
 	@PostMapping("/registro") //Post: envío info // Acá tiene que ir al registro (cuando haga la acción)
 	public String nuevoAutor(@RequestParam("nombre") String nombre) {
 		servAutor.crearAutor(nombre);
-		return ("redirect:/"); // acá crea el autor y le indico que vuelva a mi pág ppal.
+		return ("redirect:/autor/lista"); // acá crea el autor y le indico que vuelva a mi pág ppal.
 	}
 	
 	@GetMapping("/lista")
