@@ -46,9 +46,18 @@ public class ControladorAutor {
 		return "redirect:/autor/lista";
 	}
 	
-	//@GetMapping("/eliminar/{id}")
-	//public String viewEliminar() {
-	//	return "eliminarAutor";
-	//}
+	@GetMapping("/editar/{id}")
+	public String viewEditar(ModelMap modelo,@PathVariable int id) {
+		//String id2 = String.valueOf(id);
+		//modelo.put("id2", id2);
+		return "editarAutor.html";
+	}
+	
+	@PostMapping("/editar/{id}")
+	public String editar(@PathVariable int id,@RequestParam String nombre) {
+		//int id3 = Integer.valueOf(id2);
+		servAutor.modificarAutor(id, nombre);
+		return "redirect:/autor/lista";
+	}
 	
 }

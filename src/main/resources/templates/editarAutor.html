@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 </head>
 <body>
 	<section>
-        <form class="row g-3" action="/autor/editar" method="POST"> <!-- tiene 3 columnas // autor/registro es donde va
+        <form class="row g-3" th:action="@{/autor/editar/__${id}__}" method="POST"> <!-- tiene 3 columnas // autor/registro es donde va
         el navegador // Post es que voy a enviar informacion
         // este "/registro" POST coincide con el controladorAutor-->
             <div class="col-md-4"> <!-- md-4 ocupa un tercio de la pantalla / divide en 12 -->
