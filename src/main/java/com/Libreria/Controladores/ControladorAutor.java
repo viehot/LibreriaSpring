@@ -39,6 +39,14 @@ public class ControladorAutor {
 		return "listaAutor.html";
 	}
 	
+	@PostMapping("/lista")
+	public String buscarName(@RequestParam String nombre) {
+		Autor a = servAutor.findName(nombre);
+		System.out.println(a.getNombre()+" con id "+a.getId());
+		return "resultado";
+		
+	}
+	
 	@GetMapping("/eliminar/{id}")
 	public String eliminar(@PathVariable int id) {
 		
@@ -47,15 +55,12 @@ public class ControladorAutor {
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String viewEditar(ModelMap modelo,@PathVariable int id) {
-		//String id2 = String.valueOf(id);
-		//modelo.put("id2", id2);
-		return "editarAutor.html";
+	public String viewEditar() {
+			return "editarAutor.html";
 	}
 	
 	@PostMapping("/editar/{id}")
 	public String editar(@PathVariable int id,@RequestParam String nombre) {
-		//int id3 = Integer.valueOf(id2);
 		servAutor.modificarAutor(id, nombre);
 		return "redirect:/autor/lista";
 	}

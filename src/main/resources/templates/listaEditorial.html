@@ -24,17 +24,17 @@
 					<th scope="col">Borrar</th>
 				</tr>
 			</thead>
-			<tbody th:each="autor : ${listaAutores}">
+			<tbody th:each="edi : ${edito}">
 				<tr>
-					<th scope="row" th:text="${autor.id}"></th>
-					<td th:text="${autor.nombre}"></td>
-					<td th:text="${autor.alta}"></td>
+					<th scope="row" th:text="${edi.id}"></th>
+					<td th:text="${edi.nombre}"></td>
+					<td th:text="${edi.alta}"></td>
 					
 					<td>
-					<a th:href="@{/autor/editar/__${autor.id}__}"><i class="fa fa-arrow-up"></i></a>
+					<a th:href="@{/editorial/editar/__${edi.id}__}"><i class="fa fa-arrow-up"></i></a>
 					</td>
 					<td> 
-					<a th:href="@{/autor/eliminar/__${autor.id}__}"><i class="fa fa-ban"></i></a>
+					<a th:href="@{/editorial/eliminar/__${edi.id}__}"><i class="fa fa-ban"></i></a>
 					</td>
 				</tr>
 
@@ -46,7 +46,7 @@
    	<section class=" text-center container">
 			<div class="row justify-content-md-center">
 				<div class="col col-md-2">
-					<a th:href="@{/autor/registro}" class="btn btn-success my-2">Nuevo</a>
+					<a th:href="@{/editorial/registro}" class="btn btn-success my-2">Nuevo</a>
 					</p>
 				</div>
 				<div class="col col-md-2">
@@ -54,14 +54,6 @@
 					</p>
 				</div>
 			</div>
-		</section>
-		
-		<section>
-			<form th:action="@{/autor/lista}" method="POST">
-				<label>Buscar por nombre</label>
-				<input type="text" name="nombre"></input>
-				<button type="submit">Buscar</button>
-			</form>
 		</section>
    	
 

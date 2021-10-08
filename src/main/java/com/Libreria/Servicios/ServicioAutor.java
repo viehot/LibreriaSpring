@@ -41,6 +41,16 @@ public class ServicioAutor {
 		return listaAutores;
 	}
 	
+	public Autor listAut(int id) {
+		Autor a = repAutor.getById(id);
+		return a;
+	}
+	
+	public Autor findName(String nombre) {
+		Autor a = repAutor.findAutorName(nombre);
+		return a;
+	}
+	
 	public int randomId() {
 		String uuid=UUID.randomUUID().toString(); //Un random
 		int id=uuid.hashCode();// paso el código de ese uuid, para que quede un valor más corto
