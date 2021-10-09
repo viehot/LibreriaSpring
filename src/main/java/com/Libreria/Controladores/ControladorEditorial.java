@@ -26,18 +26,27 @@ public class ControladorEditorial {
 	public String listEditorial(ModelMap model) {
 		List<Editorial> edi = servi.listarEditorial();
 		model.addAttribute("edito", edi);
-		return "listaEditorial";
+		model.put("lista", "Lista de Editoriales");
+		return "/editorial/listaEditorial";
 	}
 	
 	@GetMapping("/registro")
-	public String regEditorial() {
-		return "crearEditorial";
+	public String regEditorial(ModelMap model) {
+		model.put("registro", "Registro de Editorial");
+		return "/editorial/listaEditorial";
 	}
 	
 	@PostMapping("/registro")
-	public String registro(@RequestParam String nombre) {
-		servi.crearEditorial(nombre);
-		return "redirect:/editorial/lista";
+	public String registro(ModelMap model,@RequestParam String nombre) {
+		try {
+			servi.crearEditorial(nombre);
+			return "redirect:/editorial/lista";
+		} catch (Exception e) {
+			model.put("error", "Error al cargar nombre");
+			return regEditorial(model);
+		}
+		
+		
 	}
 	
 	@GetMapping("/eliminar/{id}")
@@ -50,12 +59,20 @@ public class ControladorEditorial {
 	public String viewEditar(ModelMap model,@PathVariable int id) {
 		Editorial edi = servi.listEdit(id);
 		model.addAttribute("edito", edi);
-		return "editarEditorial";
+		model.put("editar", "Editar Editorial");
+		return "/editorial/listaEditorial";
 	}
 	
 	@PostMapping("/editar/{id}")
-	public String editar(@PathVariable int id,@RequestParam String nombre) {
-		servi.modificarEditorial(id, nombre);
-		return "redirect:/editorial/lista";
+	public String editar(ModelMap model,@PathVariable int id,@RequestParam String nombre) {
+		try {
+			servi.modificarEditorial(id, nombre);
+			return "redirect:/editorial/lista";
+		} catch (Exception e) {
+			model.put("error", "Error al cargar nombre");
+			return viewEditar(model, id);
+		}
+		
+		
 	}
 }

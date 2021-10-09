@@ -15,7 +15,10 @@ public class ServicioEditorial {
 	private RepEditorial repEdi; //Es como una instancia del Repositorio de Autor (siempre que se inicialice el proyecto)
 	
 	
-	public void crearEditorial(String nombre) {
+	public void crearEditorial(String nombre) throws Exception {
+		
+		validar(nombre);
+		
 		Editorial a=new Editorial();
 		a.setNombre(nombre);
 		a.setId(randomId());
@@ -29,7 +32,10 @@ public class ServicioEditorial {
 		repEdi.deleteById(id);
 	}
 	
-	public void modificarEditorial(Integer id,String nombre) {
+	public void modificarEditorial(Integer id,String nombre) throws Exception {
+		
+		validar(nombre);
+		
 		Editorial a=repEdi.findById(id).get();
 		a.setNombre(nombre);
 		repEdi.save(a);
@@ -43,6 +49,12 @@ public class ServicioEditorial {
 	public Editorial listEdit(int id) {
 		Editorial e = repEdi.getById(id);
 		return e;
+	}
+	
+	public void validar(String nombre) throws Exception {
+		if (nombre == null || nombre.isEmpty()) {
+			throw new Exception();
+		}
 	}
 	
 	public int randomId() {
