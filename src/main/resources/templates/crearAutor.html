@@ -10,7 +10,13 @@
     <title>Boostrap</title>
 </head>
 <body>
-	<section>
+	<section class="container m-5">
+		<div th:if="${error}!=null" class="card text-white bg-danger mb-3" style="max-width: 23rem;">
+			<div class="card-body">
+				<h5 class="card-title">Error</h5>
+				<p class="card-text" th:text="${error}"></p>
+			</div>
+		</div>
         <form class="row g-3" action="/autor/registro" method="POST"> <!-- tiene 3 columnas // autor/registro es donde va
         el navegador // Post es que voy a enviar informacion
         // este "/registro" POST coincide con el controladorAutor-->

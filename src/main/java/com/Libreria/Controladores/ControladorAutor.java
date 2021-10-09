@@ -27,9 +27,15 @@ public class ControladorAutor {
 	}
 
 	@PostMapping("/registro") //Post: envío info // Acá tiene que ir al registro (cuando haga la acción)
-	public String nuevoAutor(@RequestParam("nombre") String nombre) {
-		servAutor.crearAutor(nombre);
-		return ("redirect:/autor/lista"); // acá crea el autor y le indico que vuelva a mi pág ppal.
+	public String nuevoAutor(ModelMap model, @RequestParam("nombre") String nombre) {
+		try {
+			servAutor.crearAutor(nombre);
+			return ("redirect:/autor/lista"); // acá crea el autor y le indico que vuelva a mi pág ppal.
+		} catch (Exception e) {
+			model.put("error", "Error al ingresar nombre");
+			return "crearAutor";
+		}
+
 	}
 	
 	@GetMapping("/lista")
@@ -43,7 +49,7 @@ public class ControladorAutor {
 	public String buscarName(@RequestParam String nombre) {
 		Autor a = servAutor.findName(nombre);
 		System.out.println(a.getNombre()+" con id "+a.getId());
-		return "resultado";
+		return "reditect:/autor/lista";
 		
 	}
 	

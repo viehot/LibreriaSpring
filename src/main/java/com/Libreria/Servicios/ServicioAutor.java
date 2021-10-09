@@ -16,7 +16,10 @@ public class ServicioAutor {
 	private RepAutor repAutor; //Es como una instancia del Repositorio de Autor (siempre que se inicialice el proyecto)
 	
 	
-	public void crearAutor(String nombre) {
+	public void crearAutor(String nombre) throws Exception {
+		
+		validar(nombre);
+		
 		Autor a=new Autor();
 		a.setNombre(nombre);
 		a.setId(randomId());
@@ -49,6 +52,12 @@ public class ServicioAutor {
 	public Autor findName(String nombre) {
 		Autor a = repAutor.findAutorName(nombre);
 		return a;
+	}
+	
+	public void validar(String nombre) throws Exception {
+		if (nombre == null || nombre.isEmpty()) {
+			throw new Exception();
+		}
 	}
 	
 	public int randomId() {
