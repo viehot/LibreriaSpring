@@ -10,7 +10,8 @@
     <title>Boostrap</title>
 </head>
 <body>
-	<section class="container m-5">
+	<div th:if="${registro}!=null" class="container m-5">
+		<h1 th:text="${registro}" class="text-center"></h1>
 		<div th:if="${error}!=null" class="card text-white bg-danger mb-3" style="max-width: 23rem;">
 			<div class="card-body">
 				<h5 class="card-title">Error</h5>
@@ -23,6 +24,29 @@
             <div class="col-md-4"> <!-- md-4 ocupa un tercio de la pantalla / divide en 12 -->
               <label for="validationName" class="form-label">Nombre</label>
               <input type="text" class="form-control" name="nombre">
+              <!-- name="nombre" ese nombre tiene que coincidir con el nombre del autor en este caso
+              y el type tiene que coincidir con el tipo de dato del "nombre" -->
+            </div>
+
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+          </form>
+      </div>
+      <section th:if="${editar}!=null" class="container m-5">
+      	<h1 th:text="${editar}" class="text-center"></h1>
+     	<div th:if="${error}!=null" class="card text-white bg-danger mb-3" style="max-width: 23rem;">
+			<div class="card-body">
+				<h5 class="card-title">Error</h5>
+				<p class="card-text" th:text="${error}"></p>
+			</div>
+		</div>
+        <form class="row g-3" th:action="@{/autor/editar/__${autor.id}__}" method="POST"> <!-- tiene 3 columnas // autor/registro es donde va
+        el navegador // Post es que voy a enviar informacion
+        // este "/registro" POST coincide con el controladorAutor-->
+            <div class="col-md-4"> <!-- md-4 ocupa un tercio de la pantalla / divide en 12 -->
+              <label for="validationName" class="form-label">Nombre</label>
+              <input type="text" class="form-control" name="nombre" th:value="${autor.nombre}">
               <!-- name="nombre" ese nombre tiene que coincidir con el nombre del autor en este caso
               y el type tiene que coincidir con el tipo de dato del "nombre" -->
             </div>

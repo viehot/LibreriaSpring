@@ -22,8 +22,9 @@ public class ControladorAutor {
 	private ServicioAutor servAutor;
 	
 	@GetMapping("/registro")
-	public String registroAutor() {
-		return "crearAutor";
+	public String registroAutor(ModelMap model) {
+		model.addAttribute("registro", "Cargar Autor");
+		return "/autores/registroAutor";
 	}
 
 	@PostMapping("/registro") //Post: envío info // Acá tiene que ir al registro (cuando haga la acción)
@@ -33,7 +34,7 @@ public class ControladorAutor {
 			return ("redirect:/autor/lista"); // acá crea el autor y le indico que vuelva a mi pág ppal.
 		} catch (Exception e) {
 			model.put("error", "Error al ingresar nombre");
-			return "crearAutor";
+			return registroAutor(model);
 		}
 
 	}
@@ -42,7 +43,7 @@ public class ControladorAutor {
 	public String listar(ModelMap modelo) {
 		List<Autor> listaAut=servAutor.listarAutor();
 		modelo.addAttribute("listaAutores",listaAut);
-		return "listaAutor.html";
+		return "/autores/listaAutor.html";
 	}
 	
 	@PostMapping("/lista")
@@ -61,14 +62,24 @@ public class ControladorAutor {
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String viewEditar() {
-			return "editarAutor.html";
+	public String viewEditar(ModelMap model,@PathVariable int id) {
+		Autor aut = servAutor.listAut(id);
+		model.addAttribute("autor", aut);
+		model.put("editar", "Editar Autor");
+			return "/registroAutor";
 	}
 	
 	@PostMapping("/editar/{id}")
-	public String editar(@PathVariable int id,@RequestParam String nombre) {
-		servAutor.modificarAutor(id, nombre);
-		return "redirect:/autor/lista";
+	public String editar(ModelMap model, @PathVariable int id,@RequestParam String nombre) {
+		try {
+			servAutor.modificarAutor(id, nombre);
+			return "redirect:/autor/lista";
+		} catch (Exception e) {
+			model.put("error", "Error. Al ingresar nombre");
+			
+			return viewEditar(model, id);
+		}
+		
 	}
 	
 }

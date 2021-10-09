@@ -33,7 +33,10 @@ public class ServicioAutor {
 		repAutor.deleteById(id);
 	}
 	
-	public void modificarAutor(Integer id,String nombre) {
+	public void modificarAutor(Integer id,String nombre) throws Exception {
+		
+		validar(nombre);
+		
 		Autor a=repAutor.findById(id).get();
 		a.setNombre(nombre);
 		repAutor.save(a);
