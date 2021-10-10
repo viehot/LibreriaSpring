@@ -1,6 +1,7 @@
 package com.Libreria.Servicios;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,13 @@ public class ServicioLibro {
 		repLibro.save(lib);
 	}
 	
+	public List<Libro> listarLibros (){
+		return repLibro.findAll();
+	}
+	
+	public Libro listLibro (int id) {
+		return repLibro.getById(id);
+	}
 	
 	
 	public void validar(long isbn, String titulo, int anio, int ejemplares) throws Exception {
