@@ -132,6 +132,68 @@
 			</div>
 		</div>
 	</section>
+	<section th:if="${editar}!=null" class="container">
+		<div class="row vh-100 justify-content-center align-items-center">
+			<div class="col-auto">
+				<h1 th:text="${editar}" class="text-center"></h1>
+				<div th:if="${error}!=null" class="card text-white bg-danger mb-3" style="max-width: 23rem;">
+					<div class="card-body">
+						<h5 class="card-title">Error</h5>
+						<p class="card-text" th:text="${error}"></p>
+					</div>
+				</div>
+				<form th:action="@{/libro/editar/__${libro.id}__}" method="POST">
+					<div class="form-group">
+						<label class="form-label">ISBN</label>
+						<input type="number" class="form-control" name="isbn" th:value="${libro.isbn}"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Titulo</label>
+						<input type="text" class="form-control" name="titulo" th:value="${libro.titulo}"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Añio</label>
+						<input type="number" class="form-control" name="anio" th:value="${libro.anio}"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Cantidad</label>
+						<input type="number" class="form-control" name="ejemplares" th:value="${libro.ejemplares}"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Autor</label>
+						<select class="form-select" name="autor">
+							<div th:if="${error}==null">
+								<option selected disabled th:text="${libro.autor.nombre}"></option>
+							</div>
+							<div th:if="${error}!=null">
+								<option selected th:text="${autores}"></option>
+							</div>
+							<div th:each="aut : ${autor}">
+								<option th:text="${aut.nombre}"></option>
+							</div>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Editorial</label>
+						<select class="form-select" name="editorial">
+							<div th:if="${error}==null">
+								<option selected disabled th:text="${libro.editorial.nombre}"></option>
+							</div>
+							<div th:if="${error}!=null">
+								<option selected th:text="${edito}"></option>
+							</div>
+							<div th:each="edit : ${editorial}">
+								<option th:text="${edit.nombre}"></option>
+							</div>
+						</select>
+					</div>
+
+					<button class="btn btn-primary" type="submit">Guardar</button>
+
+				</form>
+			</div>
+		</div>
+	</section>
 
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

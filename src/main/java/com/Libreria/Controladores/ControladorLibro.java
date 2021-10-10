@@ -73,5 +73,16 @@ public class ControladorLibro {
 		return "redirect:/libro/lista";
 	}
 	
+	@GetMapping("/editar/{id}")
+	public String editar(ModelMap model, @PathVariable int id) {
+		model.put("editar", "Editar Libro");
+		Libro lib = serLib.listLibro(id);
+		List<Autor> aut = serAut.listarAutor();
+		List<Editorial> edit = serEdit.listarEditorial();
+		model.addAttribute("libro", lib);
+		model.addAttribute("autor", aut);
+		model.addAttribute("editorial", edit);
+		return "/libro/listarLibro";
+	}
 	
 }
