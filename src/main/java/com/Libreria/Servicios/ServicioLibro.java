@@ -47,6 +47,29 @@ public class ServicioLibro {
 		
 	}
 	
+	public void eliminarLibro(int id) {
+		repLibro.deleteById(id);
+	}
+	
+	public void editarLibro(int id,long isbn, String titulo, int anio, int ejemplares,String nombreAut, String nombreEdit) throws Exception {
+		
+		validar(isbn, titulo, anio, ejemplares);
+		
+		Libro lib = repLibro.getById(id);
+		Autor aut = serviAut.findName(nombreAut);
+		Editorial edit = servEdit.findName(nombreEdit);
+		
+		lib.setIsbn(isbn);
+		lib.setTitulo(titulo);
+		lib.setAnio(anio);
+		lib.setEjemplares(ejemplares);
+		lib.setEjemplRestantes(lib.getEjemplares() - lib.getEjemplPrestados());
+		lib.setAutor(aut);
+		lib.setEditorial(edit);
+		
+		repLibro.save(lib);
+	}
+	
 	
 	
 	public void validar(long isbn, String titulo, int anio, int ejemplares) throws Exception {
