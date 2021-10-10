@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Libreria.Repositorios.RepLibro;
+import com.Libreria.entidades.Autor;
+import com.Libreria.entidades.Editorial;
+import com.Libreria.entidades.Libro;
 
 @Service
 public class ServicioLibro {
@@ -19,6 +22,30 @@ public class ServicioLibro {
 	
 	@Autowired
 	private ServicioEditorial servEdit;
+	
+	public void registroLibro(long isbn, String titulo, int anio, int ejemplares, String nombreAut , String nombreEdit) throws Exception {
+		
+		validar(isbn, titulo, anio, ejemplares);
+		
+		Libro lib = new Libro();
+		Autor aut = serviAut.findName(nombreAut);
+		Editorial edit = servEdit.findName(nombreEdit);
+		
+		
+		lib.setId(randomId());
+		lib.setIsbn(isbn);
+		lib.setTitulo(titulo);
+		lib.setAnio(anio);
+		lib.setEjemplares(ejemplares);
+		lib.setEjemplPrestados(0);
+		lib.setEjemplRestantes(lib.getEjemplares());
+		lib.setAlta(true);
+		lib.setAutor(aut);
+		lib.setEditorial(edit);
+		
+		repLibro.save(lib);
+		
+	}
 	
 	
 	
