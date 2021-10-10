@@ -51,6 +51,11 @@ public class ServicioEditorial {
 		return e;
 	}
 	
+	public Editorial findName(String nombre) {
+		Editorial a = repEdi.findEditorialName(nombre);
+		return a;
+	}
+	
 	public void validar(String nombre) throws Exception {
 		if (nombre == null || nombre.isEmpty()) {
 			throw new Exception();
