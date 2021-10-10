@@ -13,6 +13,7 @@
 	<title>Libreria</title>
 
 </head>
+
 <body>
 	<section th:if="${lista}!=null" class="container m-5">
 		<!-- clase de bootstrap -->
@@ -69,9 +70,61 @@
 		</div>
 
 	</section>
+	<section th:if="${registro}!=null" class="container">
+		<div class="row vh-100 justify-content-center align-items-center">
+			<div class="col-auto">
+				<h1 th:text="${registro}" class="text-center"></h1>
+				<div th:if="${error}!=null" class="card text-white bg-danger mb-3" style="max-width: 23rem;">
+					<div class="card-body">
+						<h5 class="card-title">Error</h5>
+						<p class="card-text" th:text="${error}"></p>
+					</div>
+				</div>
+				<form th:action="@{/libro/registro}" method="POST">
+					<div class="form-group">
+						<label class="form-label">ISBN</label>
+						<input type="number" class="form-control" name="isbn"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Titulo</label>
+						<input type="text" class="form-control" name="titulo"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Añio</label>
+						<input type="number" class="form-control" name="anio"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Cantidad</label>
+						<input type="number" class="form-control" name="ejemplares"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Autor</label>
+						<select class="form-select">
+							<option selected disabled value="">Elegir..</option>
+							<div th:each="aut : ${autor}">
+								<option th:text="${aut.nombre}"></option>
+							</div>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Editorial</label>
+						<select class="form-select">
+							<option selected disabled value="">Elegir..</option>
+							<div th:each="edit : ${editorial}">
+								<option th:text="${edit.nombre}"></option>
+							</div>
+						</select>
+					</div>
+
+					<button class="btn btn-primary" type="submit">Guardar</button>
+
+				</form>
+			</div>
+		</div>
+	</section>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
