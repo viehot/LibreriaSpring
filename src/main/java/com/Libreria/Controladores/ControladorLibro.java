@@ -50,12 +50,18 @@ public class ControladorLibro {
 	}
 	
 	@PostMapping("/registro")
-	public String regisLibro(ModelMap model,@RequestParam int isbn,@RequestParam String titulo,@RequestParam int anio,@RequestParam int ejemplares, @RequestParam String autor, @RequestParam String editorial) {
+	public String regisLibro(ModelMap model,@RequestParam long isbn,@RequestParam String titulo,@RequestParam int anio,@RequestParam int ejemplares, @RequestParam String autor, @RequestParam String editorial) {
 		try {
 			serLib.registroLibro(isbn, titulo, anio, ejemplares, autor, editorial);
 			return "redirect:/libro/lista";
 		} catch (Exception e) {
 			model.put("error", e.getMessage());
+			model.put("isbn", isbn);
+			model.put("titulo", titulo);
+			model.put("anio", anio);
+			model.put("ejemplares", ejemplares);
+			model.put("autores", autor);
+			model.put("edito", editorial);
 			return registro(model);
 		}
 	}

@@ -83,24 +83,29 @@
 				<form th:action="@{/libro/registro}" method="POST">
 					<div class="form-group">
 						<label class="form-label">ISBN</label>
-						<input type="number" class="form-control" name="isbn"></input>
+						<input type="number" class="form-control" name="isbn" th:value="${isbn}"></input>
 					</div>
 					<div class="form-group">
 						<label class="form-label">Titulo</label>
-						<input type="text" class="form-control" name="titulo"></input>
+						<input type="text" class="form-control" name="titulo" th:value="${titulo}"></input>
 					</div>
 					<div class="form-group">
 						<label class="form-label">Añio</label>
-						<input type="number" class="form-control" name="anio"></input>
+						<input type="number" class="form-control" name="anio" th:value="${anio}"></input>
 					</div>
 					<div class="form-group">
 						<label class="form-label">Cantidad</label>
-						<input type="number" class="form-control" name="ejemplares"></input>
+						<input type="number" class="form-control" name="ejemplares" th:value="${ejemplares}"></input>
 					</div>
 					<div class="form-group">
 						<label class="form-label">Autor</label>
 						<select class="form-select" name="autor">
-							<option selected disabled value="">Elegir..</option>
+							<div th:if="${error}==null">
+								<option selected disabled value="">Elegir..</option>
+							</div>
+							<div th:if="${error}!=null">
+								<option selected th:text="${autores}"></option>
+							</div>
 							<div th:each="aut : ${autor}">
 								<option th:text="${aut.nombre}"></option>
 							</div>
@@ -109,7 +114,12 @@
 					<div class="form-group">
 						<label class="form-label">Editorial</label>
 						<select class="form-select" name="editorial">
-							<option selected disabled value="">Elegir..</option>
+							<div th:if="${error}==null">
+								<option selected disabled value="">Elegir..</option>
+							</div>
+							<div th:if="${error}!=null">
+								<option selected th:text="${edito}"></option>
+							</div>
 							<div th:each="edit : ${editorial}">
 								<option th:text="${edit.nombre}"></option>
 							</div>
