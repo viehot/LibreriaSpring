@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Libreria.Servicios.ServicioAutor;
 import com.Libreria.Servicios.ServicioEditorial;
@@ -45,5 +47,16 @@ public class ControladorLibro {
 		model.addAttribute("editorial", edit);
 		return "/libro/listarLibro";
 		
+	}
+	
+	@PostMapping("/registro")
+	public String regisLibro(ModelMap model,@RequestParam int isbn,@RequestParam String titulo,@RequestParam int anio,@RequestParam int ejemplares, @RequestParam String autor, @RequestParam String editorial) {
+		try {
+			serLib.registroLibro(isbn, titulo, anio, ejemplares, autor, editorial);
+			return "redirect:/libro/lista";
+		} catch (Exception e) {
+			model.put("error", e.getMessage());
+			return registro(model);
+		}
 	}
 }

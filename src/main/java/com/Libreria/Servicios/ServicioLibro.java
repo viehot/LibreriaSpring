@@ -26,7 +26,7 @@ public class ServicioLibro {
 	
 	public void registroLibro(long isbn, String titulo, int anio, int ejemplares, String nombreAut , String nombreEdit) throws Exception {
 		
-		validar(isbn, titulo, anio, ejemplares);
+		validar(isbn, titulo, anio, ejemplares,nombreAut,nombreEdit);
 		
 		Libro lib = new Libro();
 		Autor aut = serviAut.findName(nombreAut);
@@ -54,7 +54,7 @@ public class ServicioLibro {
 	
 	public void editarLibro(int id,long isbn, String titulo, int anio, int ejemplares,String nombreAut, String nombreEdit) throws Exception {
 		
-		validar(isbn, titulo, anio, ejemplares);
+		validar(isbn, titulo, anio, ejemplares,nombreAut,nombreEdit);
 		
 		Libro lib = repLibro.getById(id);
 		Autor aut = serviAut.findName(nombreAut);
@@ -80,7 +80,7 @@ public class ServicioLibro {
 	}
 	
 	
-	public void validar(long isbn, String titulo, int anio, int ejemplares) throws Exception {
+	public void validar(long isbn, String titulo, int anio, int ejemplares, String autor, String editorial) throws Exception {
 		LocalDate ahora = LocalDate.now();
 		
 		if (isbn < 1000000) {
@@ -94,6 +94,12 @@ public class ServicioLibro {
 		}
 		if (anio > ahora.getYear()) {
 			throw new Exception("Error. El añio no puede ser mayor al actual");
+		}
+		if (autor == null || autor.isBlank()) {
+			throw new Exception("Error. Debe elegir un autor");
+		}
+		if (editorial == null || editorial.isBlank()) {
+			throw new Exception("Error. Debe elegir una Editorial");
 		}
 	}
 	

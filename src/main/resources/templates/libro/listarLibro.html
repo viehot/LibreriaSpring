@@ -99,7 +99,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label">Autor</label>
-						<select class="form-select">
+						<select class="form-select" name="autor">
 							<option selected disabled value="">Elegir..</option>
 							<div th:each="aut : ${autor}">
 								<option th:text="${aut.nombre}"></option>
@@ -108,7 +108,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label">Editorial</label>
-						<select class="form-select">
+						<select class="form-select" name="editorial">
 							<option selected disabled value="">Elegir..</option>
 							<div th:each="edit : ${editorial}">
 								<option th:text="${edit.nombre}"></option>
