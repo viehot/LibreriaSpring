@@ -85,4 +85,15 @@ public class ControladorLibro {
 		return "/libro/listarLibro";
 	}
 	
+	@PostMapping("/editar/{id}")
+	public String editarLib(ModelMap model,@PathVariable int id,@RequestParam long isbn,@RequestParam String titulo,@RequestParam int anio,@RequestParam int ejemplares, @RequestParam String autor, @RequestParam String editorial) {
+		try {
+			serLib.editarLibro(id, isbn, titulo, anio, ejemplares, autor, editorial);
+			return "redirect:/libro/lista";
+		} catch (Exception e) {
+			model.put("error", e.getMessage());
+			return editar(model, id);
+		}
+	}
+	
 }
