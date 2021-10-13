@@ -66,7 +66,7 @@ public class ControladorAutor {
 		Autor aut = servAutor.listAut(id);
 		model.addAttribute("autor", aut);
 		model.put("editar", "Editar Autor");
-			return "/registroAutor";
+			return "/autores/registroAutor";
 	}
 	
 	@PostMapping("/editar/{id}")

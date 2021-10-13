@@ -83,7 +83,7 @@
 				<form th:action="@{/libro/registro}" method="POST">
 					<div class="form-group">
 						<label class="form-label">ISBN</label>
-						<input type="number" class="form-control" name="isbn" th:value="${isbn}"></input>
+						<input type="number" class="form-control" name="isbn" th:value="${isbn}" required></input>
 					</div>
 					<div class="form-group">
 						<label class="form-label">Titulo</label>
@@ -91,17 +91,17 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label">Añio</label>
-						<input type="number" class="form-control" name="anio" th:value="${anio}"></input>
+						<input type="number" class="form-control" name="anio" th:value="${anio}" required></input>
 					</div>
 					<div class="form-group">
 						<label class="form-label">Cantidad</label>
-						<input type="number" class="form-control" name="ejemplares" th:value="${ejemplares}"></input>
+						<input type="number" class="form-control" name="ejemplares" th:value="${ejemplares}" required></input>
 					</div>
 					<div class="form-group">
 						<label class="form-label">Autor</label>
 						<select class="form-select" name="autor">
 							<div th:if="${error}==null">
-								<option selected disabled value="">Elegir..</option>
+								<option selected value="null">Elegir..</option>
 							</div>
 							<div th:if="${error}!=null">
 								<option selected th:text="${autores}"></option>
@@ -115,7 +115,7 @@
 						<label class="form-label">Editorial</label>
 						<select class="form-select" name="editorial">
 							<div th:if="${error}==null">
-								<option selected disabled value="">Elegir..</option>
+								<option selected value="null">Elegir..</option>
 							</div>
 							<div th:if="${error}!=null">
 								<option selected th:text="${edito}"></option>
