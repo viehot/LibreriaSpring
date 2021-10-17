@@ -26,4 +26,5 @@ public class Prestamo implements Serializable {
 	private Libro libro;
 	private Usuario usuario;
 	
+	
 }
