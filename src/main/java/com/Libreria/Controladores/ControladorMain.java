@@ -2,6 +2,7 @@ package com.Libreria.Controladores;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -15,6 +16,25 @@ public class ControladorMain {
 		return "index.html"; // El html es un String, por eso el método devuelve String
 	}
 	
+	@GetMapping("/registro/usuario")
+	public String registroUser() {
+		return "registro";
+	}
+	
+	@GetMapping("/registro/admin")
+	public String registroAdmin() {
+		return "registro";
+	}
+	
+	@PostMapping("/registro/usuario")
+	public String regUser() {
+		return "redirect:/";
+	}
+	
+	@PostMapping("/registro/admin")
+	public String regAdmin() {
+		return "redirect:/";
+	}
 
 
 }
