@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -23,7 +24,9 @@ public class Prestamo implements Serializable {
 	private Date fechaPrestamo;
 	private Date fechaDevolucion;
 	private Boolean alta;
+	@OneToOne
 	private Libro libro;
+	@OneToOne
 	private Usuario usuario;
 	
 	

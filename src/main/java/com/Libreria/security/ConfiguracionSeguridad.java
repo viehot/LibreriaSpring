@@ -28,8 +28,22 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
-				.and().csrf()
+				.antMatchers("/css/*", "/js/*", "/img/*", "/","/login/**","/registro/**").permitAll()
+				.antMatchers("/**","/css/*", "/js/*", "/img/*").hasRole("ADMIN")
+				.and().formLogin()
+					.loginPage("/login")
+					.loginProcessingUrl("/logincheck")
+					.usernameParameter("email")
+					.passwordParameter("password")
+					.defaultSuccessUrl("/loginsuccess")
+					.failureUrl("/login?error=error")
+					.permitAll()
+				.and().logout()
+					.logoutUrl("/logout")
+					.logoutSuccessUrl("/")
+					.permitAll()
+				.and()
+				.csrf()
 					.disable();
 	}
 
