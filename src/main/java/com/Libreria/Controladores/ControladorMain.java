@@ -1,6 +1,9 @@
 package com.Libreria.Controladores;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,22 +32,35 @@ public class ControladorMain {
 		return "registro.html";
 	}
 	
-	@GetMapping("/registro/admin")
-	public String registroAdmin() {
-		return "registro";
-	}
 	
 	@PostMapping("/registro/usuario")
 	public String regUser(ModelMap model,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String telefono,@RequestParam String email,@RequestParam String password) {
 		servicioUsuario.registroUsuario(nombre, apellido, telefono, email, password);
+		return "login";
+	}
+	
+	@GetMapping("/login")
+	public String login(Authentication auth, HttpSession http, @RequestParam(required = false) String error,ModelMap model) {
+		try {
+			if (auth.getUsername()!= null) {
+				return "redirect:/";
+			} else {
+				model.addAttribute("error", "La cagaste wey otra vez");
+				return "login";
+			}
+		} catch (Exception e) {
+			model.addAttribute("error", "La cagaste wey");
+			return "login";
+		}
+		
+	}
+	
+	@GetMapping("/loginsucces")
+	public String loginsucces() {
 		return "redirect:/";
 	}
 	
-	@PostMapping("/registro/admin")
-	public String regAdmin(ModelMap model,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String telefono,@RequestParam String email,@RequestParam String password) {
-		servicioUsuario.registroAdmin(nombre, apellido, telefono, email, password);
-		return "redirect:/";
-	}
+	
 
 
 }
