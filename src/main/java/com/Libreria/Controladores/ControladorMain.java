@@ -35,23 +35,19 @@ public class ControladorMain {
 	
 	@PostMapping("/registro/usuario")
 	public String regUser(ModelMap model,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String telefono,@RequestParam String email,@RequestParam String password) {
-		servicioUsuario.registroUsuario(nombre, apellido, telefono, email, password);
+		try {
+			servicioUsuario.registroUsuario(nombre, apellido, telefono, email, password);
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "registro";
+		}
+		
 		return "login";
 	}
 	
 	@GetMapping("/login")
-	public String login(Authentication auth, HttpSession http, @RequestParam(required = false) String error,ModelMap model) {
-		try {
-			if (auth.getUsername()!= null) {
-				return "redirect:/";
-			} else {
-				model.addAttribute("error", "La cagaste wey otra vez");
-				return "login";
-			}
-		} catch (Exception e) {
-			model.addAttribute("error", "La cagaste wey");
-			return "login";
-		}
+	public String login() {
+		return "login";
 		
 	}
 	
